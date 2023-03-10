@@ -6,12 +6,25 @@
         xmlns:local="clr-namespace:Calculator_wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="525" Width="350">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="BotonRojo">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Red"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="100"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+        
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -21,21 +34,139 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="0" 
-               FontSize="60" 
-               Grid.ColumnSpan="4"
-               VerticalAlignment="Bottom" 
-               HorizontalAlignment="Right"/>
-        <Button Content="AC"
-                Grid.Row="1"
-                Margin="5" />
 
-        <Button Content="+/-"
+
+
+        <Label x:Name="lblResultado"
+               Content="0"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Bottom"
+               Grid.ColumnSpan="4"
+               FontSize="60" Grid.Column="0"/>
+        <Button Click="ACBoton_Click"
+                Content="AC"
+                Style="{StaticResource BotonRojo}"
+               Grid.Column="0"
+                Grid.Row="1" />
+        <Button
+                Content="+/-"
+               Click="MasMenosBoton_Click"
                 Grid.Row="1"
-                Grid.Column="1"
-                Margin="5"/>
+                Grid.Column="1"/>
+        <Button 
+                Content="%"
+                Click="PorcentajeBoton_Click"
+                Grid.Row="1"
+                Grid.Column="2"/>
+        <Button Content="/"
+                Click="OperacionBoton_Click"
+                x:Name="botonDividir"
+                Grid.Row="1"
+                Grid.Column="4"/>
+
+        <Button  x:Name="botonSiete"
+                 Click="NumberButton_Click"
+               
+                 Content="7"
+                 Background="{StaticResource numerosColor}"
+                 Grid.Row="2" />
+
+        <Button
+                x:Name="botonOcho"
+                Click="NumberButton_Click"
+               Background="{StaticResource numerosColor}"
+                Content="8"
+                Grid.Row="2"
+                Grid.Column="1" />
+        <Button 
+               x:Name="botonNueve"
+             Background="{StaticResource numerosColor}"
+                Click="NumberButton_Click"
+                Content="9"
+              
+                Grid.Row="2"
+                Grid.Column="2" />
+        <Button 
+            x:Name="botonMultiplicar"
+                Content="*"
+                 Click="OperacionBoton_Click"
+                Grid.Row="2"
+                Grid.Column="4"/>
+        <Button 
+               x:Name="botonCuatro"
+                Click="NumberButton_Click"
+                Background="{StaticResource numerosColor}"
+                Content="4"
+                
+                Grid.Row="3" />
+        <Button 
+               x:Name="botonCinco"
+                Click="NumberButton_Click"
+                Background="{StaticResource numerosColor}"
+                Content="5"
+              
+                Grid.Row="3"
+                Grid.Column="1"/>
+        <Button 
+               x:Name="botonSeis"
+                Click="NumberButton_Click"
+                Background="{StaticResource numerosColor}"
+                Content="6"
+               
+                Grid.Row="3"
+                Grid.Column="2"/>
+        <Button 
+            x:Name="botonRestar"
+                Click="OperacionBoton_Click"
+                Content="-"
+                
+                Grid.Row="3"
+                Grid.Column="4"/>
+        <Button 
+               x:Name="botonUno"
+                Click="NumberButton_Click"
+                 Background="{StaticResource numerosColor}"
+                Content="1"
+                Grid.Row="4" />
+        <Button 
+               x:Name="botonDos"
+                Click="NumberButton_Click"
+                Content="2"
+                 Background="{StaticResource numerosColor}"
+              
+                Grid.Row="4"
+                Grid.Column="1"/>
+        <Button
+               x:Name="botonTres"
+                Click="NumberButton_Click"
+                 Background="{StaticResource numerosColor}"
+                Content="3"
+                Grid.Row="4"
+                Grid.Column="2"/>
+        <Button 
+                Content="+"
+               x:Name="botonSumar"
+                 Click="OperacionBoton_Click"
+                Grid.Row="4"
+                Grid.Column="4"/>
+        <Button x:Name="botonCero"
+                Click="NumberButton_Click"
+                Content="0"
+                 Background="{StaticResource numerosColor}"
+              Grid.ColumnSpan="2"
+                Grid.Row="5" />
+        <Button 
+                Content="."
+                Click="puntoBoton_Click"
+                Grid.Row="5"
+                Grid.Column="2"/>
+        <Button 
+                Click="IgualBoton_Click"
+                Content="="
+                Grid.Row="5"
+                Grid.Column="4"/>
 
     </Grid>
-    
+
 
 </Window>
