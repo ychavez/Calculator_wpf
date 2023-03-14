@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <StackPanel>
         <DataGrid x:Name="ProductsDG" AutoGenerateColumns="True"></DataGrid>
+            <Button Content="Crear nuevo" x:Name="btnNuevo" Click="btnNuevo_Click"/>
+
+        </StackPanel>
     </Grid>
 </Window>

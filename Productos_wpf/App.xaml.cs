@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Productos_wpf.DataContext;
+using Productos_wpf.Views;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -32,6 +33,7 @@ namespace Productos_wpf
             services.AddDbContext<ProductsContext>
                 (x=> x.UseSqlite("Data Source = Products.db"));
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<NewWindow>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e) 
