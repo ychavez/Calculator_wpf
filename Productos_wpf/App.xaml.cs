@@ -33,7 +33,7 @@ namespace Productos_wpf
             services.AddDbContext<ProductsContext>
                 (x=> x.UseSqlite("Data Source = Products.db"));
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<NewWindow>();
+            services.AddScoped<NewWindow>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e) 
