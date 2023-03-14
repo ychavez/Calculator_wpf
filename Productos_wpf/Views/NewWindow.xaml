@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="NewWindow" Height="450" Width="800">
     <Grid>
+
         <StackPanel>
             <TextBox x:Name="txtNombre"/>
             <TextBox x:Name="txtCategoria"/>
