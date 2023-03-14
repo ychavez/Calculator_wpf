@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Productos_wpf.DataContext;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Productos_wpf
 {
@@ -20,9 +10,20 @@ namespace Productos_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ProductsContext productsContext;
+
+        public MainWindow(ProductsContext productsContext)
         {
+            
+            this.productsContext = productsContext;
             InitializeComponent();
+            GetProducts();
+        }
+
+        private void GetProducts()
+        {
+            var products = productsContext.Products.ToList();
+            ProductsDG.ItemsSource = products;
         }
     }
 }
