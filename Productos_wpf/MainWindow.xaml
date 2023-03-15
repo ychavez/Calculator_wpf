@@ -24,7 +24,7 @@
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
                     <Button ToolTip="Nuevo"  
                             x:Name="btnNuevo" 
-                            Click="btnNuevo_Click">
+                            Command="{Binding INewWindowCommand}">
                         <materialDesign:PackIcon Kind="ContentSaveAdd"/>
                     </Button>
                     <Separator/>
@@ -36,7 +36,7 @@
                     <Separator/>
                     <Button ToolTip="Eliminar"  
                             x:Name="btnEliminar" 
-                            Click="btnEliminar_Click">
+                           Command="{Binding IEditWindowsCommand}">
                         <materialDesign:PackIcon Kind="Bin"/>
                     </Button>
                 </ToolBar>
@@ -45,6 +45,7 @@
 
             <DataGrid x:Name="ProductsDG"
                       ItemsSource="{Binding productList}"
+                      SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                       AutoGenerateColumns="True"></DataGrid>
             
 

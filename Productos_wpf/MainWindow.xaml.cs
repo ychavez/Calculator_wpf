@@ -10,10 +10,9 @@ namespace Productos_wpf
     {
 
 
-        public MainWindow()
+        public MainWindow(ProductsViewModel vm)
         { 
             InitializeComponent();
-            ProductsViewModel vm = new();
             DataContext = vm;
         }
 
