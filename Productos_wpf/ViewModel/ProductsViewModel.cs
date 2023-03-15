@@ -2,7 +2,6 @@
 using Productos_wpf.Handlers;
 using Productos_wpf.Models;
 using Productos_wpf.Views;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
