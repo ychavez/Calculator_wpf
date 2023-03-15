@@ -1,41 +1,32 @@
-﻿using Productos_wpf.Models;
-using System;
+﻿using Productos_wpf.DataContext;
+using Productos_wpf.Models;
+using Productos_wpf.ViewModel.Services;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Productos_wpf.ViewModel
 {
     public class ProductsViewModel
     {
-        private IList<Product> _ProductList;
 
-        public List<Product> productList { get { return _ProductList.ToList(); } }
+        public ICommand NewProductCommand { get; set; }
+
+        public List<Product> productList { get; set; }
 
 
-
-        public ProductsViewModel()
+        public ProductsViewModel(ProductsContext context)
         {
-            _ProductList = new List<Product>
-            {
-                 new Product {
-                     Id=1000,
-                     Category="Muebles",
-                     Description="Bonito escritorio",
-                     Name="Escritorio de madera",
-                     Price=100m
-                 },
-                 new Product
-                 {
-                    Id=1001,
-                     Category="Computo",
-                     Description="laptop hp 2323",
-                     Name="laptop hp 12 gb ram",
-                     Price=400m
-                 }
+            productList = context.Products.ToList();
+            NewProductCommand =
+                new CommandHandler(NuevoProducto, () => true);
+        }
 
-             };
+
+        void NuevoProducto() 
+        {
+            MessageBox.Show("Nuevo producto");
         }
     }
 }

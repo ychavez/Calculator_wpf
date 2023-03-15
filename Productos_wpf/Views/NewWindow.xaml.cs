@@ -43,7 +43,6 @@ namespace Productos_wpf.Views
             productsContext.Add(product);
             productsContext.SaveChanges();
             this.Close();
-
         }
     }
 }

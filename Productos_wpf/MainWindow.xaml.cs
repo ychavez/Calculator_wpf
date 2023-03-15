@@ -8,12 +8,9 @@ namespace Productos_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
-        public MainWindow()
+       public MainWindow(ProductsViewModel vm)
         { 
             InitializeComponent();
-            ProductsViewModel vm = new();
             DataContext = vm;
         }
 
