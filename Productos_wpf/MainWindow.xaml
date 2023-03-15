@@ -19,8 +19,32 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-        <DataGrid x:Name="ProductsDG" AutoGenerateColumns="True"></DataGrid>
-            <Button Content="Crear nuevo" x:Name="btnNuevo" Click="btnNuevo_Click"/>
+            
+            <ToolBarTray>
+                <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
+                    <Button ToolTip="Nuevo"  
+                            x:Name="btnNuevo" 
+                            Click="btnNuevo_Click">
+                        <materialDesign:PackIcon Kind="ContentSaveAdd"/>
+                    </Button>
+                    <Separator/>
+                    <Button ToolTip="Editar"  
+                            x:Name="btnEditar" 
+                            Click="btnEditar_Click">
+                        <materialDesign:PackIcon Kind="Pencil"/>
+                    </Button>
+                    <Separator/>
+                    <Button ToolTip="Eliminar"  
+                            x:Name="btnEliminar" 
+                            Click="btnEliminar_Click">
+                        <materialDesign:PackIcon Kind="Bin"/>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+
+            <DataGrid x:Name="ProductsDG" AutoGenerateColumns="True"></DataGrid>
+            
 
         </StackPanel>
     </Grid>

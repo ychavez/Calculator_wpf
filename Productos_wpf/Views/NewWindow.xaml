@@ -1,19 +1,83 @@
-﻿<Window x:Class="Productos_wpf.Views.NewWindow"
+﻿<Window xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+         TextElement.FontWeight="Regular"
+         TextElement.FontSize="13"
+         
+         TextOptions.TextFormattingMode="Ideal"
+         TextOptions.TextRenderingMode="Auto"
+         
+         Background="{DynamicResource MaterialDesignPaper}"
+         FontFamily="{DynamicResource MaterialDesignFont}"
+    
+    x:Class="Productos_wpf.Views.NewWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Productos_wpf.Views"
         mc:Ignorable="d"
-        Title="NewWindow" Height="450" Width="800">
+        Title="NewWindow" Height="500" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <StackPanel>
-            <TextBox x:Name="txtNombre"/>
-            <TextBox x:Name="txtCategoria"/>
-            <TextBox x:Name="txtDescripcion"/>
-            <TextBox x:Name="txtPrecio"/>
-            <Button x:Name="btnAceptar" Content="Aceptar" Click="btnAceptar_Click"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <materialDesign:PackIcon Kind="Wheel" 
+                                 Height="40" Width="40" 
+                                 Grid.Row="1" 
+                                 VerticalAlignment="Center" Margin="10"/>
+
+        <Label  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"
+                Content="Nombre de producto:"/>
+        <TextBox Grid.Row="1" Grid.Column="2" 
+                 VerticalAlignment="Center" x:Name="txtNombre"/>
+
+
+
+
+        <materialDesign:PackIcon Kind="About" 
+                                 Height="40" Width="40" 
+                                 Grid.Row="2" 
+                                 VerticalAlignment="Center" Margin="10"/>
+
+        <Label  Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"
+                Content="Categoria:"/>
+        <TextBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" x:Name="txtCategoria"/>
+
+
+        <materialDesign:PackIcon Kind="InfoBox" 
+                                 Height="40" Width="40" 
+                                 Grid.Row="3" 
+                                 VerticalAlignment="Center" Margin="10"/>
+
+        <Label  Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"
+                Content="Descripcion:"/>
+        <TextBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"  x:Name="txtDescripcion"/>
+
+        <materialDesign:PackIcon Kind="Money" 
+                                 Height="40" Width="40" 
+                                 Grid.Row="4" 
+                                 VerticalAlignment="Center" Margin="10"/>
+
+        <Label  Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"
+                Content="Precio:"/>
+        <TextBox Grid.Row="4" Grid.Column="2"  x:Name="txtPrecio" VerticalAlignment="Center"/>
+       
+        
+        <Button  Grid.Row="5" Grid.Column="2" x:Name="btnAceptar" 
+                 VerticalAlignment="Bottom"
+                 Content="Aceptar" Click="btnAceptar_Click"/>
+
     </Grid>
 </Window>
