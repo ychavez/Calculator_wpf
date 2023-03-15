@@ -43,7 +43,9 @@
             </ToolBarTray>
 
 
-            <DataGrid x:Name="ProductsDG" AutoGenerateColumns="True"></DataGrid>
+            <DataGrid x:Name="ProductsDG"
+                      ItemsSource="{Binding productList}"
+                      AutoGenerateColumns="True"></DataGrid>
             
 
         </StackPanel>

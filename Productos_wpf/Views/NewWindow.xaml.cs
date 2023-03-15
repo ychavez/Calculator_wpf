@@ -17,6 +17,17 @@ namespace Productos_wpf.Views
         {      
             InitializeComponent();
             this.productsContext = productsContext;
+            
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) 
+        {
+            e.Cancel = true;
+            txtNombre.Text = "";
+            txtCategoria.Text = "";
+            txtDescripcion.Text = "";
+            txtPrecio.Text = "";
+            this.Visibility = Visibility.Hidden;
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
