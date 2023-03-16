@@ -16,7 +16,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            
+
             <ToolBarTray>
                 <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
                     <Button ToolTip="Nuevo"  
@@ -26,14 +26,13 @@
                     </Button>
                     <Separator/>
                     <Button ToolTip="Editar"  
-                            x:Name="btnEditar" 
-                            Click="btnEditar_Click">
+                            Command="{Binding EditProductCommand}"
+                            x:Name="btnEditar" >
                         <materialDesign:PackIcon Kind="Pencil"/>
                     </Button>
                     <Separator/>
                     <Button ToolTip="Eliminar"  
-                            x:Name="btnEliminar" 
-                            Click="btnEliminar_Click">
+                            x:Name="btnEliminar">
                         <materialDesign:PackIcon Kind="Bin"/>
                     </Button>
                 </ToolBar>
@@ -41,9 +40,11 @@
 
 
             <DataGrid x:Name="ProductsDG"
+                      SelectionMode="Single"
+                      SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                       ItemsSource="{Binding productList}"
                       AutoGenerateColumns="True"></DataGrid>
-            
+
 
         </StackPanel>
     </Grid>

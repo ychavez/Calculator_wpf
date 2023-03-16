@@ -13,24 +13,5 @@ namespace Productos_wpf
             InitializeComponent();
             DataContext = vm;
         }
-
-        
-
-       
-
-        private void btnNuevo_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
-        private void btnEditar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnEliminar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

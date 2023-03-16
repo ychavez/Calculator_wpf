@@ -30,6 +30,7 @@ namespace Productos_wpf
             services.AddSingleton<NewWindow>();
 
             services.AddTransient<ProductsViewModel>();
+            services.AddTransient<ProductEditViewModel>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e) 

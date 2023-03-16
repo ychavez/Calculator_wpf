@@ -13,7 +13,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Productos_wpf.Views"
         mc:Ignorable="d"
-        Closing="Window_Closing"
+
         Title="NewWindow" Height="500" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,7 +39,10 @@
         <Label  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"
                 Content="Nombre de producto:"/>
         <TextBox Grid.Row="1" Grid.Column="2" 
-                 VerticalAlignment="Center" x:Name="txtNombre"/>
+                 VerticalAlignment="Center" 
+                 x:Name="txtNombre"
+                 Text="{Binding Product.Name}"
+                 />
 
 
 
@@ -51,7 +54,10 @@
 
         <Label  Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"
                 Content="Categoria:"/>
-        <TextBox Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" x:Name="txtCategoria"/>
+        <TextBox Grid.Row="2" Grid.Column="2" 
+                 VerticalAlignment="Center" 
+                 x:Name="txtCategoria"
+                  Text="{Binding Product.Category}"/>
 
 
         <materialDesign:PackIcon Kind="InfoBox" 
@@ -60,8 +66,11 @@
                                  VerticalAlignment="Center" Margin="10"/>
 
         <Label  Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"
-                Content="Descripcion:"/>
-        <TextBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"  x:Name="txtDescripcion"/>
+                Content="Descripcion:"
+               />
+        <TextBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"
+                  Text="{Binding Product.Description}"
+                 x:Name="txtDescripcion"/>
 
         <materialDesign:PackIcon Kind="Money" 
                                  Height="40" Width="40" 
@@ -70,12 +79,16 @@
 
         <Label  Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"
                 Content="Precio:"/>
-        <TextBox Grid.Row="4" Grid.Column="2"  x:Name="txtPrecio" VerticalAlignment="Center"/>
+        <TextBox Grid.Row="4" Grid.Column="2" 
+                 x:Name="txtPrecio" 
+                 VerticalAlignment="Center"
+                  Text="{Binding Product.Price}"/>
        
         
         <Button  Grid.Row="5" Grid.Column="2" x:Name="btnAceptar" 
                  VerticalAlignment="Bottom"
-                 Content="Aceptar" Click="btnAceptar_Click"/>
+                 Content="Aceptar"
+                 Command="{Binding AceptarCommand}"/>
 
     </Grid>
 </Window>

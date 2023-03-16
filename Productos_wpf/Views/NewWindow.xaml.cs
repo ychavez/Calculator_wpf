@@ -1,7 +1,5 @@
-﻿using Productos_wpf.DataContext;
-using Productos_wpf.Models;
-using System;
-using System.Linq;
+﻿using Productos_wpf.Models;
+using Productos_wpf.ViewModel;
 using System.Windows;
 
 namespace Productos_wpf.Views
@@ -11,38 +9,21 @@ namespace Productos_wpf.Views
     /// </summary>
     public partial class NewWindow : Window
     {
-        private readonly ProductsContext productsContext;
+        private readonly ProductEditViewModel vm;
 
-        public NewWindow(ProductsContext productsContext)
+        public NewWindow(ProductEditViewModel vm)
         {      
             InitializeComponent();
-            this.productsContext = productsContext;
-            
+            this.vm = vm;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) 
-        {
-            e.Cancel = true;
-            txtNombre.Text = "";
-            txtCategoria.Text = "";
-            txtDescripcion.Text = "";
-            txtPrecio.Text = "";
-            this.Visibility = Visibility.Hidden;
-        }
 
-        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        public void ShowDialog(ProductAction accion, Product product) 
         {
-            var product = new Product()
-            {
-                Name = txtNombre.Text,
-                Category = txtCategoria.Text,
-                Description = txtDescripcion.Text,
-                Price = Decimal.Parse(txtPrecio.Text)
-            };
-
-            productsContext.Add(product);
-            productsContext.SaveChanges();
-            this.Close();
+            vm.Action = accion;
+            vm.Product = product;
+            DataContext = this.vm;
+            this.ShowDialog();
         }
     }
 }
