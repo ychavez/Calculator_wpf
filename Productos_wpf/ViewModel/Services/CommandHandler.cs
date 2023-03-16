@@ -19,7 +19,11 @@ namespace Productos_wpf.ViewModel.Services
         public bool CanExecute(object? parameter)
           => canExecute();
 
-        public void Execute(object? parameter)
+        protected void OnCanExecutedChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
+        public virtual void Execute(object? parameter)
         => execute();
     }
 }

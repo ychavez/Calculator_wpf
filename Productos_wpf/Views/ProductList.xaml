@@ -1,0 +1,46 @@
+﻿<UserControl
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       
+    x:Class="Productos_wpf.Views.ProductList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Productos_wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel>
+
+            <ToolBarTray>
+                <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
+                    <Button ToolTip="Nuevo"  
+                            x:Name="btnNuevo" 
+                            Command="{Binding NewProductCommand}">
+                        <materialDesign:PackIcon Kind="ContentSaveAdd"/>
+                    </Button>
+                    <Separator/>
+                    <Button ToolTip="Editar"  
+                            Command="{Binding EditProductCommand}"
+                            x:Name="btnEditar" >
+                        <materialDesign:PackIcon Kind="Pencil"/>
+                    </Button>
+                    <Separator/>
+                    <Button ToolTip="Eliminar"  
+                            x:Name="btnEliminar">
+                        <materialDesign:PackIcon Kind="Bin"/>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+
+
+            <DataGrid x:Name="ProductsDG"
+                      SelectionMode="Single"
+                      SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                      ItemsSource="{Binding productList}"
+                      AutoGenerateColumns="True"></DataGrid>
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

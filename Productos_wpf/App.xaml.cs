@@ -1,9 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Productos_wpf.DataContext;
+using Productos_wpf.Stores;
 using Productos_wpf.ViewModel;
+using Productos_wpf.ViewModel.Services;
 using Productos_wpf.Views;
+using System;
+using System.Runtime.InteropServices.JavaScript;
 using System.Windows;
+using System.Windows.Navigation;
 
 namespace Productos_wpf
 {
@@ -26,16 +31,37 @@ namespace Productos_wpf
         {
             services.AddDbContext<ProductsContext>
                 (x=> x.UseSqlite("Data Source = Products.db"));
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton(s => new MainWindow()
+            {
+                DataContext = s.GetRequiredService<MainViewModel>()
+            });
             services.AddSingleton<NewWindow>();
 
-            services.AddTransient<ProductsViewModel>();
+
+            services.AddSingleton<ProductEditViewModel>();
+            services.AddSingleton<Func<ProductEditViewModel>>((s) => () => s.GetRequiredService<ProductEditViewModel>());
+            services.AddSingleton<NavigationService<ProductEditViewModel>>();
+
+            services.AddSingleton<ProductsViewModel>();
+            services.AddSingleton<Func<ProductsViewModel>>((s) => () => s.GetRequiredService<ProductsViewModel>());
+            services.AddSingleton<NavigationService<ProductsViewModel>>();
+
+
+            services.AddSingleton<NavigationStore>();
+            services.AddSingleton<MainViewModel>();
             services.AddTransient<ProductEditViewModel>();
         }
 
-        private void OnStartup(object sender, StartupEventArgs e) 
+        private void OnStartup(object sender, StartupEventArgs e)
         {
-            var mainWindow = serviceProvider.GetService<MainWindow>();
+
+
+            NavigationService<ProductsViewModel> navigationService =
+                serviceProvider.GetRequiredService<NavigationService<ProductsViewModel>>();
+
+
+            navigationService.Navigate();
+            var mainWindow = serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
 
