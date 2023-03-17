@@ -5,6 +5,7 @@ using Productos_wpf.ViewModel.Services;
 using Productos_wpf.Views;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Productos_wpf.ViewModel
@@ -64,7 +65,6 @@ namespace Productos_wpf.ViewModel
 
         void EnviarProductos() 
         {
-
             RestService restService = new RestService();
 
             //1 traer los productos actuales del servicio
@@ -75,11 +75,14 @@ namespace Productos_wpf.ViewModel
                 Where(x => !products.Any(y => y.Id == x.Id)).ToList();
 
             //3 mandar los nuevos productos al servicio
-            foreach (var producto in localProducts)
+
+            Parallel.ForEach(localProducts, x =>
             {
-                producto.Id = 0;
-                restService.Post(producto, "/Catalog");
-            }
+                x.Id = 0;
+                restService.Post(x, "/Catalog");
+
+            });
+
         }
 
 
