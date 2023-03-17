@@ -1,4 +1,4 @@
-﻿<Window  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+﻿<Window 
          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
          TextElement.FontWeight="Regular"
          TextElement.FontSize="13"  
@@ -15,37 +15,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-
-            <ToolBarTray>
-                <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
-                    <Button ToolTip="Nuevo"  
-                            x:Name="btnNuevo" 
-                            Command="{Binding NewProductCommand}">
-                        <materialDesign:PackIcon Kind="ContentSaveAdd"/>
-                    </Button>
-                    <Separator/>
-                    <Button ToolTip="Editar"  
-                            Command="{Binding EditProductCommand}"
-                            x:Name="btnEditar" >
-                        <materialDesign:PackIcon Kind="Pencil"/>
-                    </Button>
-                    <Separator/>
-                    <Button ToolTip="Eliminar"  
-                            x:Name="btnEliminar">
-                        <materialDesign:PackIcon Kind="Bin"/>
-                    </Button>
-                </ToolBar>
-            </ToolBarTray>
-
-
-            <DataGrid x:Name="ProductsDG"
-                      SelectionMode="Single"
-                      SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                      ItemsSource="{Binding productList}"
-                      AutoGenerateColumns="True"></DataGrid>
-
-
-        </StackPanel>
+      
     </Grid>
 </Window>

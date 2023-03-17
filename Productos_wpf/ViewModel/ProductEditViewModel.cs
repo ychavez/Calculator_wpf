@@ -1,30 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Productos_wpf.DataContext;
 using Productos_wpf.Models;
+using Productos_wpf.ViewModel.Base;
 using Productos_wpf.ViewModel.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Productos_wpf.ViewModel
 {
-    public class ProductEditViewModel : INotifyPropertyChanged
+    public class ProductEditViewModel : ViewModelBase
     {
         private readonly ProductsContext productsContext;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        void ExecPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged is not null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         public ProductAction Action { get; set; }
         public ICommand AceptarCommand { get; set; }

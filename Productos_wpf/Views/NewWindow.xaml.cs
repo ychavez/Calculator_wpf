@@ -1,29 +1,18 @@
 ﻿using Productos_wpf.Models;
 using Productos_wpf.ViewModel;
-using System.Windows;
+using System.Windows.Controls;
 
 namespace Productos_wpf.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class NewWindow : Window
+    public partial class NewWindow : UserControl
     {
-        private readonly ProductEditViewModel vm;
-
-        public NewWindow(ProductEditViewModel vm)
+        public NewWindow()
         {      
             InitializeComponent();
-            this.vm = vm;
         }
-
-
-        public void ShowDialog(ProductAction accion, Product product) 
-        {
-            vm.Action = accion;
-            vm.Product = product;
-            DataContext = this.vm;
-            this.ShowDialog();
-        }
+     
     }
 }

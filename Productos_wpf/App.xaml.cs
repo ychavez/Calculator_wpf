@@ -2,7 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Productos_wpf.DataContext;
 using Productos_wpf.ViewModel;
+using Productos_wpf.ViewModel.Services;
 using Productos_wpf.Views;
+using System;
 using System.Windows;
 
 namespace Productos_wpf
@@ -26,11 +28,38 @@ namespace Productos_wpf
         {
             services.AddDbContext<ProductsContext>
                 (x=> x.UseSqlite("Data Source = Products.db"));
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<NewWindow>();
 
-            services.AddTransient<ProductsViewModel>();
-            services.AddTransient<ProductEditViewModel>();
+            services.AddSingleton(s => new MainWindow()
+            {
+                DataContext = s.GetRequiredService<MainViewModel>()
+            });
+
+            services.AddSingleton(s => new NewWindow()
+            {
+                DataContext = s.GetRequiredService<ProductEditViewModel>()
+            });
+
+            services.AddSingleton(s => new ProductListControl()
+            {
+                DataContext = s.GetRequiredService<ProductsViewModel>()
+            });
+
+
+
+
+            services.AddSingleton<ProductsViewModel>();
+            services.AddSingleton<Func<ProductsViewModel>>(s => () => s.GetRequiredService<ProductsViewModel>());
+            services.AddSingleton<NavigationService<ProductsViewModel>>();
+
+            services.AddSingleton<ProductEditViewModel>();
+            services.AddSingleton<Func<ProductEditViewModel>>(s => () => s.GetRequiredService<ProductEditViewModel>());
+            services.AddSingleton<NavigationService<ProductEditViewModel>>();
+
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<Func<MainViewModel>>(s => () => s.GetRequiredService<MainViewModel>());
+            services.AddSingleton<NavigationService<MainViewModel>>();
+
+
         }
 
         private void OnStartup(object sender, StartupEventArgs e) 

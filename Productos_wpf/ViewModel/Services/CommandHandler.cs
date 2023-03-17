@@ -19,7 +19,7 @@ namespace Productos_wpf.ViewModel.Services
         public bool CanExecute(object? parameter)
           => canExecute();
 
-        public void Execute(object? parameter)
+        public virtual void Execute(object? parameter)
         => execute();
     }
 }
