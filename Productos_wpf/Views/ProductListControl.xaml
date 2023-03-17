@@ -28,6 +28,11 @@
                             x:Name="btnEliminar">
                         <materialDesign:PackIcon Kind="Bin"/>
                     </Button>
+                    <Button ToolTip="Sincronizar" 
+                             Command="{Binding SyncProducts}"
+                            x:Name="btnRefresh">
+                        <materialDesign:PackIcon Kind="Refresh"/>
+                    </Button>
                 </ToolBar>
             </ToolBarTray>
 

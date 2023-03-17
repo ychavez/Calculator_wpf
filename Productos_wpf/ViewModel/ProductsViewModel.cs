@@ -23,6 +23,7 @@ namespace Productos_wpf.ViewModel
 
         public ICommand NewProductCommand { get; set; }
         public ICommand EditProductCommand { get; set; }
+        public ICommand SyncProducts { get; set; }
 
         public ObservableCollection<Product> productList
         {
@@ -43,6 +44,7 @@ namespace Productos_wpf.ViewModel
 
             NewProductCommand = new NavigateCommand<ProductEditViewModel>(navigationService);
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
+            SyncProducts = new CommandHandler(EnviarProductos, () => true);
             
             this.context = context;
             this.navigationService = navigationService;
@@ -58,6 +60,26 @@ namespace Productos_wpf.ViewModel
         {
 
           
+        }
+
+        void EnviarProductos() 
+        {
+
+            RestService restService = new RestService();
+
+            //1 traer los productos actuales del servicio
+            var products = restService.GetData<Product>("/Catalog");
+
+            //2 traer los productos locales que no estan en el servicio
+            var localProducts = context.Products.ToList().
+                Where(x => !products.Any(y => y.Id == x.Id)).ToList();
+
+            //3 mandar los nuevos productos al servicio
+            foreach (var producto in localProducts)
+            {
+                producto.Id = 0;
+                restService.Post(producto, "/Catalog");
+            }
         }
 
 
