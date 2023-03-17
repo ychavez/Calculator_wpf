@@ -72,17 +72,14 @@ namespace Productos_wpf.ViewModel
 
             //2 traer los productos locales que no estan en el servicio
             var localProducts = context.Products.ToList().
-                Where(x => !products.Any(y => y.Id == x.Id)).ToList();
+                Where(x => !products.Any(y => y.Name == x.Name)).ToList();
 
             //3 mandar los nuevos productos al servicio
 
-            Parallel.ForEach(localProducts, x =>
-            {
-                x.Id = 0;
-                restService.Post(x, "/Catalog");
-
-            });
-
+      
+            foreach (var producto in localProducts)
+                restService.Post(producto, "/Catalog");
+            
         }
 
 
