@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Productos_wpf.DataContext;
+using Productos_wpf.Stores;
 using Productos_wpf.ViewModel;
 using Productos_wpf.ViewModel.Services;
 using Productos_wpf.Views;
@@ -45,8 +46,6 @@ namespace Productos_wpf
             });
 
 
-
-
             services.AddSingleton<ProductsViewModel>();
             services.AddSingleton<Func<ProductsViewModel>>(s => () => s.GetRequiredService<ProductsViewModel>());
             services.AddSingleton<NavigationService<ProductsViewModel>>();
@@ -59,11 +58,16 @@ namespace Productos_wpf
             services.AddSingleton<Func<MainViewModel>>(s => () => s.GetRequiredService<MainViewModel>());
             services.AddSingleton<NavigationService<MainViewModel>>();
 
-
+            services.AddSingleton<NavigationStore>();
         }
 
         private void OnStartup(object sender, StartupEventArgs e) 
         {
+            NavigationService<ProductsViewModel> navigationService =
+                 serviceProvider.GetRequiredService<NavigationService<ProductsViewModel>>();
+            
+            navigationService.Navigate();
+
             var mainWindow = serviceProvider.GetService<MainWindow>();
             mainWindow.Show();
         }

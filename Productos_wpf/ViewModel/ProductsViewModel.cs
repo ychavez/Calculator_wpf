@@ -14,6 +14,7 @@ namespace Productos_wpf.ViewModel
 
         #region campos
         private readonly ProductsContext context;
+        private readonly NavigationService<ProductEditViewModel> navigationService;
         private readonly NewWindow newWindow;
 
         private ObservableCollection<Product> _productList;
@@ -35,15 +36,16 @@ namespace Productos_wpf.ViewModel
 
         public Product SelectedProduct { get; set; }
       
-        public ProductsViewModel(ProductsContext context, NewWindow newWindow)
+        public ProductsViewModel(ProductsContext context, 
+            NavigationService<ProductEditViewModel> navigationService)
         {
             productList = new ObservableCollection<Product>(context.Products.ToList());
 
-            NewProductCommand = new CommandHandler(NuevoProducto, EvaluarProductos);
+            NewProductCommand = new NavigateCommand<ProductEditViewModel>(navigationService);
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
-
+            
             this.context = context;
-            this.newWindow = newWindow;
+            this.navigationService = navigationService;
         }
 
         #region metodos
@@ -55,14 +57,10 @@ namespace Productos_wpf.ViewModel
         void EditarProducto() 
         {
 
-            newWindow.ShowDialog(ProductAction.Editar, SelectedProduct);
+          
         }
 
-        void NuevoProducto()
-        {
-            newWindow.ShowDialog();
-            productList = new ObservableCollection<Product>(context.Products.ToList());
-        }
+
 
     
         #endregion
