@@ -1,11 +1,12 @@
-﻿using Productos_wpf.DataContext;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Productos_wpf.DataContext;
+using Productos_wpf.Messages;
 using Productos_wpf.Models;
 using Productos_wpf.ViewModel.Base;
 using Productos_wpf.ViewModel.Services;
 using Productos_wpf.Views;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Productos_wpf.ViewModel
@@ -24,6 +25,7 @@ namespace Productos_wpf.ViewModel
 
         public ICommand NewProductCommand { get; set; }
         public ICommand EditProductCommand { get; set; }
+        public ICommand DeleteProductCommand { get; set; }
         public ICommand SyncProducts { get; set; }
 
         public ObservableCollection<Product> productList
@@ -37,33 +39,48 @@ namespace Productos_wpf.ViewModel
         }
 
         public Product SelectedProduct { get; set; }
-      
-        public ProductsViewModel(ProductsContext context, 
+
+        public ProductsViewModel(ProductsContext context,
             NavigationService<ProductEditViewModel> navigationService)
         {
             productList = new ObservableCollection<Product>(context.Products.ToList());
 
-            NewProductCommand = new NavigateCommand<ProductEditViewModel>(navigationService);
+            NewProductCommand = new CommandHandler(NuevoProducto, () => true);
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
             SyncProducts = new CommandHandler(EnviarProductos, () => true);
-            
+            DeleteProductCommand = new CommandHandler(BorrarProducto, () => true);
+
+
+
             this.context = context;
             this.navigationService = navigationService;
         }
 
         #region metodos
 
+        void NuevoProducto()
+        {
+            navigationService.Navigate();
+            WeakReferenceMessenger.Default.Send(new ProductMessage((new Product(), ProductAction.Crear)));
+
+        }
+
         bool EvaluarProductos()
         {
             return productList.Count() <= 15;
         }
-        void EditarProducto() 
+        void EditarProducto()
         {
-
-          
+            navigationService.Navigate();
+            WeakReferenceMessenger.Default.Send(new ProductMessage((SelectedProduct, ProductAction.Editar)));
+        }
+        void BorrarProducto()
+        {
+            navigationService.Navigate();
+            WeakReferenceMessenger.Default.Send(new ProductMessage((SelectedProduct, ProductAction.Eliminar)));
         }
 
-        void EnviarProductos() 
+        void EnviarProductos()
         {
             RestService restService = new RestService();
 
@@ -76,15 +93,15 @@ namespace Productos_wpf.ViewModel
 
             //3 mandar los nuevos productos al servicio
 
-      
+
             foreach (var producto in localProducts)
                 restService.Post(producto, "/Catalog");
-            
+
         }
 
 
 
-    
+
         #endregion
     }
 }

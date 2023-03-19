@@ -45,6 +45,8 @@ namespace Productos_wpf
                 DataContext = s.GetRequiredService<ProductsViewModel>()
             });
 
+         
+
 
             services.AddSingleton<ProductsViewModel>();
             services.AddSingleton<Func<ProductsViewModel>>(s => () => s.GetRequiredService<ProductsViewModel>());
