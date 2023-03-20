@@ -15,7 +15,31 @@
     mc:Ignorable="d"
        d:DesignHeight="450"
     d:DesignWidth="800">
-    <Grid>
+
+    <StackPanel>
+
+        <ToolBarTray>
+            <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
+                <Button ToolTip="Leer"   
+                        Visibility="{Binding ReadButtonVisible,
+                   Converter={StaticResource ButtonToVis}, FallbackValue=Hidden}"
+                        Command="{Binding LeerCommand}">
+                    
+                    <materialDesign:PackIcon Kind="BarcodeScanner"/>
+                </Button>
+
+                <Button ToolTip="Detener"   
+                        Command="{Binding DetenerLeerCommand}"
+                        Visibility="{Binding StopButtonVisible,
+                   Converter={StaticResource ButtonToVis}, FallbackValue=Hidden}"
+                        >
+                   
+                    <materialDesign:PackIcon Kind="StopPause"/>
+                </Button>
+            </ToolBar>
+
+        </ToolBarTray>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
@@ -29,12 +53,15 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <materialDesign:PackIcon Kind="Wheel" 
                                  Height="40" Width="40" 
                                  Grid.Row="1" 
                                  VerticalAlignment="Center" Margin="10"/>
+
+
 
         <Label  Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"
                 Content="Nombre de producto:"/>
@@ -89,6 +116,9 @@
                  VerticalAlignment="Bottom"
                  Content="Aceptar"
                  Command="{Binding AceptarCommand}"/>
+       
+
 
     </Grid>
+        </StackPanel>
 </UserControl>

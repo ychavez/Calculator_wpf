@@ -26,6 +26,8 @@ namespace Productos_wpf.ViewModel
         public ICommand NewProductCommand { get; set; }
         public ICommand EditProductCommand { get; set; }
         public ICommand DeleteProductCommand { get; set; }
+     
+
         public ICommand SyncProducts { get; set; }
 
         public ObservableCollection<Product> productList
@@ -44,12 +46,11 @@ namespace Productos_wpf.ViewModel
             NavigationService<ProductEditViewModel> navigationService)
         {
             productList = new ObservableCollection<Product>(context.Products.ToList());
-
             NewProductCommand = new CommandHandler(NuevoProducto, () => true);
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
             SyncProducts = new CommandHandler(EnviarProductos, () => true);
             DeleteProductCommand = new CommandHandler(BorrarProducto, () => true);
-
+          
 
 
             this.context = context;
@@ -57,6 +58,8 @@ namespace Productos_wpf.ViewModel
         }
 
         #region metodos
+
+
 
         void NuevoProducto()
         {

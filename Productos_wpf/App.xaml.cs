@@ -45,6 +45,8 @@ namespace Productos_wpf
                 DataContext = s.GetRequiredService<ProductsViewModel>()
             });
 
+            services.AddSingleton<SerialReader>();
+
          
 
 
