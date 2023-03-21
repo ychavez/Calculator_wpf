@@ -25,7 +25,10 @@
                     </Button>
                     <Separator/>
                     <Button ToolTip="Eliminar"  
-                            x:Name="btnEliminar">
+                            x:Name="btnEliminar"
+                            Command="{Binding DeleteProductCommand}"
+                            >
+                        
                         <materialDesign:PackIcon Kind="Bin"/>
                     </Button>
                     <Button ToolTip="Sincronizar" 
@@ -41,6 +44,7 @@
                       SelectionMode="Single"
                       SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                       ItemsSource="{Binding productList}"
+                      IsReadOnly="True"
                       AutoGenerateColumns="True"></DataGrid>
 
 
