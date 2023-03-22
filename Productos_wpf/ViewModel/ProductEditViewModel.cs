@@ -12,6 +12,7 @@ namespace Productos_wpf.ViewModel
     public class ProductEditViewModel : ViewModelBase
     {
         private readonly ProductsContext productsContext;
+        private readonly NavigationService<ProductsViewModel> navigationService;
 
         public ProductAction Action { get; set; }
         public ICommand AceptarCommand { get; set; }
@@ -28,9 +29,11 @@ namespace Productos_wpf.ViewModel
 
         public Product Product { get; set; }
 
-        public ProductEditViewModel(ProductsContext productsContext)
+        public ProductEditViewModel(ProductsContext productsContext, 
+            NavigationService<ProductsViewModel> navigationService)
         {
             this.productsContext = productsContext;
+            this.navigationService = navigationService;
             AceptarCommand = new
                 CommandHandler(SeleccionarAccion, () => true);
 
@@ -41,7 +44,6 @@ namespace Productos_wpf.ViewModel
                 IsReadOnly = e.Value.Item2 == ProductAction.Eliminar;
             });
         }
-
         void SeleccionarAccion()
         {
             switch (Action)
@@ -56,6 +58,8 @@ namespace Productos_wpf.ViewModel
                     EliminarProducto();
                     break;
             }
+            navigationService.Navigate();
+            WeakReferenceMessenger.Default.Send<ProductActionMessage>(new(Action));
         }
 
         void EliminarProducto() 

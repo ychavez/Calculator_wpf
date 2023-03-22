@@ -44,21 +44,30 @@ namespace Productos_wpf.ViewModel
         public ProductsViewModel(ProductsContext context, 
             NavigationService<ProductEditViewModel> navigationService)
         {
-            productList = new ObservableCollection<Product>(context.Products.ToList());
-            
+            Llenarlista(context);
+
+            WeakReferenceMessenger.Default.Register<ProductActionMessage>(this, (a, o) => Llenarlista(context));
+
             NewProductCommand = new CommandHandler(() =>
             {
                 navigationService.Navigate();
                 WeakReferenceMessenger.Default.Send(new ProductMessage((new(), ProductAction.Crear)));
             }, () => true);
-         
+
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
             DeleteProductCommand = new CommandHandler(EliminarProducto, () => true);
             SyncProducts = new CommandHandler(EnviarProductos, () => true);
-            
+
             this.context = context;
             this.navigationService = navigationService;
+            
+            void Llenarlista(ProductsContext context)
+            {
+                productList = new ObservableCollection<Product>(context.Products.ToList());
+            }
         }
+
+     
 
         #region metodos
 
@@ -66,6 +75,7 @@ namespace Productos_wpf.ViewModel
         {
             navigationService.Navigate();
             WeakReferenceMessenger.Default.Send(new ProductMessage((SelectedProduct, ProductAction.Eliminar)));
+
         }
 
 
