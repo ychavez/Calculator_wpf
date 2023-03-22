@@ -19,7 +19,8 @@
     <StackPanel>
         <ToolBarTray>
             <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
-                <Button ToolTip="Leer" Command="{Binding LeerCOM}" Visibility="{Binding IsReading,
+                <Button ToolTip="Leer" Command="{Binding LeerCOM}"
+                        Visibility="{Binding IsReading,
                     Converter={StaticResource boolToVisInversor}}">
                     <materialDesign:PackIcon Kind="BarcodeScanner"/>
                 </Button>
