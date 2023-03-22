@@ -25,6 +25,7 @@
                     </Button>
                     <Separator/>
                     <Button ToolTip="Eliminar"  
+                            Command="{Binding DeleteProductCommand}"
                             x:Name="btnEliminar">
                         <materialDesign:PackIcon Kind="Bin"/>
                     </Button>

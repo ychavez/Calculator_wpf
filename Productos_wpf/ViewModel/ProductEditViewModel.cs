@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.EntityFrameworkCore;
 using Productos_wpf.DataContext;
+using Productos_wpf.Messages;
 using Productos_wpf.Models;
 using Productos_wpf.ViewModel.Base;
 using Productos_wpf.ViewModel.Services;
@@ -14,6 +16,16 @@ namespace Productos_wpf.ViewModel
         public ProductAction Action { get; set; }
         public ICommand AceptarCommand { get; set; }
 
+        bool _IsReadOnly;
+        public bool IsReadOnly
+        {
+            get => _IsReadOnly; set
+            {
+                _IsReadOnly = value;
+                ExecPropertyChanged(nameof(IsReadOnly));
+            }
+        }
+
         public Product Product { get; set; }
 
         public ProductEditViewModel(ProductsContext productsContext)
@@ -21,26 +33,45 @@ namespace Productos_wpf.ViewModel
             this.productsContext = productsContext;
             AceptarCommand = new
                 CommandHandler(SeleccionarAccion, () => true);
-        }
 
-        void SeleccionarAccion() 
-        {
-            if (Action == ProductAction.Crear)
+            WeakReferenceMessenger.Default.Register<ProductMessage>(this, (r, e) =>
             {
-                CrearProducto();
-                return;
-            }
-
-            EditarProducto();
+                Action = e.Value.Item2;
+                Product = e.Value.Item1;
+                IsReadOnly = e.Value.Item2 == ProductAction.Eliminar;
+            });
         }
 
-        void CrearProducto() 
+        void SeleccionarAccion()
+        {
+            switch (Action)
+            {
+                case ProductAction.Crear:
+                    CrearProducto();
+                    break;
+                case ProductAction.Editar:
+                    EditarProducto();
+                    break;
+                case ProductAction.Eliminar:
+                    EliminarProducto();
+                    break;
+            }
+        }
+
+        void EliminarProducto() 
+        {
+
+            productsContext.Products.Remove(Product);
+            productsContext.SaveChanges();
+        }
+
+        void CrearProducto()
         {
             productsContext.Add(Product);
             productsContext.SaveChanges();
         }
 
-        void EditarProducto() 
+        void EditarProducto()
         {
             productsContext.Entry(Product).State = EntityState.Modified;
             productsContext.SaveChanges();

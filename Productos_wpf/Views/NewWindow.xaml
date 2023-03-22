@@ -29,6 +29,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <materialDesign:PackIcon Kind="Wheel" 
@@ -41,6 +42,7 @@
         <TextBox Grid.Row="1" Grid.Column="2" 
                  VerticalAlignment="Center" 
                  x:Name="txtNombre"
+                  IsReadOnly="{Binding IsReadOnly}"
                  Text="{Binding Product.Name}"
                  />
 
@@ -55,6 +57,7 @@
         <Label  Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"
                 Content="Categoria:"/>
         <TextBox Grid.Row="2" Grid.Column="2" 
+                 IsReadOnly="{Binding IsReadOnly}"
                  VerticalAlignment="Center" 
                  x:Name="txtCategoria"
                   Text="{Binding Product.Category}"/>
@@ -70,6 +73,7 @@
                />
         <TextBox Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"
                   Text="{Binding Product.Description}"
+                  IsReadOnly="{Binding IsReadOnly}"
                  x:Name="txtDescripcion"/>
 
         <materialDesign:PackIcon Kind="Money" 
@@ -80,15 +84,20 @@
         <Label  Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"
                 Content="Precio:"/>
         <TextBox Grid.Row="4" Grid.Column="2" 
-                 x:Name="txtPrecio" 
-                 VerticalAlignment="Center"
+                  IsReadOnly="{Binding IsReadOnly}"
+                  x:Name="txtPrecio" 
+                  VerticalAlignment="Center"
                   Text="{Binding Product.Price}"/>
-       
-        
+
+
         <Button  Grid.Row="5" Grid.Column="2" x:Name="btnAceptar" 
                  VerticalAlignment="Bottom"
                  Content="Aceptar"
                  Command="{Binding AceptarCommand}"/>
+
+        <Label Content="Esta seguro que desea eliminar este articulo?" Grid.Row="6" Grid.Column="2" 
+               VerticalAlignment="Center" HorizontalAlignment="Center" 
+               Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVis}, FallbackValue=Hidden}"/>
 
     </Grid>
 </UserControl>

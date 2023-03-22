@@ -1,4 +1,6 @@
-﻿using Productos_wpf.DataContext;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Productos_wpf.DataContext;
+using Productos_wpf.Messages;
 using Productos_wpf.Models;
 using Productos_wpf.ViewModel.Base;
 using Productos_wpf.ViewModel.Services;
@@ -24,6 +26,7 @@ namespace Productos_wpf.ViewModel
 
         public ICommand NewProductCommand { get; set; }
         public ICommand EditProductCommand { get; set; }
+        public ICommand DeleteProductCommand { get; set; }
         public ICommand SyncProducts { get; set; }
 
         public ObservableCollection<Product> productList
@@ -42,9 +45,15 @@ namespace Productos_wpf.ViewModel
             NavigationService<ProductEditViewModel> navigationService)
         {
             productList = new ObservableCollection<Product>(context.Products.ToList());
-
-            NewProductCommand = new NavigateCommand<ProductEditViewModel>(navigationService);
+            
+            NewProductCommand = new CommandHandler(() =>
+            {
+                navigationService.Navigate();
+                WeakReferenceMessenger.Default.Send(new ProductMessage((new(), ProductAction.Crear)));
+            }, () => true);
+         
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
+            DeleteProductCommand = new CommandHandler(EliminarProducto, () => true);
             SyncProducts = new CommandHandler(EnviarProductos, () => true);
             
             this.context = context;
@@ -53,14 +62,24 @@ namespace Productos_wpf.ViewModel
 
         #region metodos
 
+        void EliminarProducto() 
+        {
+            navigationService.Navigate();
+            WeakReferenceMessenger.Default.Send(new ProductMessage((SelectedProduct, ProductAction.Eliminar)));
+        }
+
+
         bool EvaluarProductos()
         {
             return productList.Count() <= 15;
         }
         void EditarProducto() 
         {
+            navigationService.Navigate();
+            ///WeakReferenceMessenger nos sirve para enviar y recibir mensajes desde los distintos VM
+            WeakReferenceMessenger.Default.Send(new ProductMessage((SelectedProduct, ProductAction.Editar)));
 
-          
+
         }
 
         void EnviarProductos() 
