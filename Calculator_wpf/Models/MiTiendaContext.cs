@@ -27,6 +27,8 @@ public partial class MiTiendaContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<Empleados> Empleados { get; set; }
+
     public virtual DbSet<Prueba> Pruebas { get; set; }
 
     public virtual DbSet<SalesSummary> SalesSummaries { get; set; }
