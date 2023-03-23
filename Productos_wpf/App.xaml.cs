@@ -7,7 +7,6 @@ using Productos_wpf.ViewModel.Services;
 using Productos_wpf.Views;
 using System;
 using System.Windows;
-
 namespace Productos_wpf
 {
     /// <summary>
@@ -66,10 +65,10 @@ namespace Productos_wpf
         {
             NavigationService<ProductsViewModel> navigationService =
                  serviceProvider.GetRequiredService<NavigationService<ProductsViewModel>>();
+            var mainWindow = serviceProvider.GetService<MainWindow>();
             
             navigationService.Navigate();
 
-            var mainWindow = serviceProvider.GetService<MainWindow>();
             mainWindow.Show();
         }
 

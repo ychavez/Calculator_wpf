@@ -28,6 +28,7 @@ namespace Productos_wpf.ViewModel
         public ICommand EditProductCommand { get; set; }
         public ICommand DeleteProductCommand { get; set; }
         public ICommand SyncProducts { get; set; }
+        public ICommand PrintDocument { get; set; }
 
         public ObservableCollection<Product> productList
         {
@@ -57,6 +58,7 @@ namespace Productos_wpf.ViewModel
             EditProductCommand = new CommandHandler(EditarProducto, () => true);
             DeleteProductCommand = new CommandHandler(EliminarProducto, () => true);
             SyncProducts = new CommandHandler(EnviarProductos, () => true);
+            PrintDocument = new CommandHandler(() => new TicketService().Print(SelectedProduct!), () => true);
 
             this.context = context;
             this.navigationService = navigationService;

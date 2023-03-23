@@ -32,6 +32,10 @@
             </ToolBar>
         </ToolBarTray>
         <Grid>
+            <!--<Grid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding }"/>
+                <KeyBinding Key="Esc" Command="{Binding comando}"/>
+            </Grid.InputBindings>-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="Auto"/>
@@ -61,9 +65,6 @@
                   IsReadOnly="{Binding IsReadOnly}"
                  Text="{Binding Product.Name}"
                  />
-
-
-
 
             <materialDesign:PackIcon Kind="About" 
                                  Height="40" Width="40" 
@@ -109,7 +110,10 @@
             <Button  Grid.Row="5" Grid.Column="2" x:Name="btnAceptar" 
                  VerticalAlignment="Bottom"
                  Content="Aceptar"
-                 Command="{Binding AceptarCommand}"/>
+                 Command="{Binding AceptarCommand}">
+      
+                
+            </Button>
 
             <Label Content="Esta seguro que desea eliminar este articulo?" Grid.Row="6" Grid.Column="2" 
                VerticalAlignment="Center" HorizontalAlignment="Center" 

@@ -13,6 +13,7 @@ namespace Productos_wpf.Views
         {      
             InitializeComponent();
         }
-     
+
+      
     }
 }

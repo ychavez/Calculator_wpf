@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.EntityFrameworkCore;
 using Productos_wpf.DataContext;
 using Productos_wpf.Messages;
@@ -24,7 +25,8 @@ namespace Productos_wpf.ViewModel
         bool _IsReading;
         public bool IsReading
         {
-            get => _IsReading; set
+            get => _IsReading; 
+            set
             {
                 _IsReading = value;
                 ExecPropertyChanged(nameof(IsReading));
@@ -35,7 +37,8 @@ namespace Productos_wpf.ViewModel
         bool _IsReadOnly;
         public bool IsReadOnly
         {
-            get => _IsReadOnly; set
+            get => _IsReadOnly; 
+            set
             {
                 _IsReadOnly = value;
                 ExecPropertyChanged(nameof(IsReadOnly));
@@ -112,8 +115,6 @@ namespace Productos_wpf.ViewModel
             productsContext.Entry(Product).State = EntityState.Modified;
             productsContext.SaveChanges();
         }
-
-
     }
 
     public enum ProductAction

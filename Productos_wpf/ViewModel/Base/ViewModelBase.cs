@@ -1,5 +1,4 @@
-﻿using Productos_wpf.DataContext;
-using System;
+﻿using System;
 using System.ComponentModel;
 
 namespace Productos_wpf.ViewModel.Base

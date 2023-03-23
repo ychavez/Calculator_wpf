@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Calculator_wpf.Models;
+using System.Linq;
+using System.Windows;
 
 namespace Calculator_wpf
 {
@@ -48,6 +50,9 @@ namespace Calculator_wpf
 
         private void puntoBoton_Click(object sender, RoutedEventArgs e)
         {
+            var db = new MiTiendaContext();
+
+            var orders = db.Orders.ToList();
             if (!lblResultado!.Content!.ToString()!.Contains("."))
             {
                 lblResultado.Content = $"{lblResultado.Content}.";
